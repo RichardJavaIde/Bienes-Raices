@@ -1,5 +1,6 @@
 <?php
-include"./includes/templates/header.php";
+require"includes/funciones.php";
+incluirTemplate("header");
 ?>
     <main class="contenedor seccion">
       <h1>Casas y Depas en Venta</h1>
@@ -291,5 +292,5 @@ include"./includes/templates/header.php";
 
     <?php
 
-    include"./includes/templates/footer.php";
+    incluirTemplate("footer");
 ?>

@@ -1,6 +1,10 @@
 <?php
-$inicio=true;
-include"./includes/templates/header.php";
+require"includes/funciones.php";
+$inicio=true; 
+
+incluirTemplate("header",$inicio);
+
+
 ?>
     <main class="contenedor seccion">
       <h1>Mas sobre nosotros</h1>
