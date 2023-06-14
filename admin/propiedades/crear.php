@@ -111,7 +111,7 @@ $rtesultado = mysqli_query($db,$query);
 
 if($rtesultado){
   //echo "Datos insertados correctamente.";
-  header('location:/bienesraices_inicio/admin/index.phph?resultado=1');
+  header('location: /bienesraices_inicio/admin/index.php?resultado=1');
 }
 }
 
