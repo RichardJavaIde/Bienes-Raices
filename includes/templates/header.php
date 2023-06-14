@@ -5,23 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bienes Raices</title>
-    <link rel="stylesheet" href="  build/css/app.css" />
+    <link rel="stylesheet" href="/bienesraices_inicio/build/css/app.css" />
   </head>
   <body>
     <header class="header <?php echo $inicio ? "inicio":""; ?>">
       <div class="contenedor contenido-header">
         <div class="barra">
-          <a href="index.php">
-            <img src="build/img/logo.svg" alt="Logo" />
+          <a href="/bienesraices_inicio/index.php">
+            <img src="/bienesraices_inicio/build/img/logo.svg" alt="Logo" />
           </a>
 
           <div class="mobile-menu">
-            <img src="build/img/barras.svg" alt="icono menu responsive" />
+            <img src="/bienesraices_inicio/build/img/barras.svg" alt="icono menu responsive" />
           </div>
           <div class="derecha">
             <img
               class="dark-mode-boton"
-              src="build/img/dark-mode.svg"
+              src="/bienesraices_inicio/build/img/dark-mode.svg"
               alt="Icono de dark-mode"
             />
             <nav class="navegacion">
