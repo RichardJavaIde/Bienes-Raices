@@ -1,5 +1,4 @@
 <?php
-
 //Improtar la coneccion a de la base de datos.
 require "../includes/config/datebase.php"; 
 $db = conectarDB();
@@ -14,6 +13,32 @@ $resultadoConsulta = mysqli_query($db,$query);
 //Mesage condicional.
 $resultado = $_GET['resultado'] ?? null;
 
+if($_SERVER['REQUEST_METHOD']==='POST'){
+
+  $id = $_POST['id']; //Ese post no va a existir hasta que se cree este REQUEST_METHOD.
+  $id = filter_var($id,FILTER_VALIDATE_INT);
+  //var_dump($id);
+
+  if($id){
+    //Elimina la imagen que esta guardada
+    $query = "SELECT imagen FROM propiedades where id =$id";  
+    $resultado = mysqli_query($db,$query);
+    $propiedad = mysqli_fetch_assoc($resultado);
+    
+    unlink('../imagen/'.$propiedad['imagen']);
+   
+    //Elimina el registro de la base de datos
+    $query = "DELETE FROM propiedades WHERE id = $id";
+    $resultado = mysqli_query($db,$query);
+ 
+
+    if($resultado){
+      header('location: /bienesraices_inicio/admin/index.php?resultado=3');
+    
+    }
+  }
+
+  }
 //Incluir template.
 require"../includes/funciones.php";
 incluirTemplate("header");
@@ -25,6 +50,8 @@ incluirTemplate("header");
           <p class="alerta exito">Anuncio creado correctamente.</p>
         <?php elseif(intval( $resultado ) === 2): ?>
           <p class="alerta exito">Anuncio actualizado correctamente.</p>
+          <?php elseif(intval( $resultado ) === 3): ?>
+          <p class="alerta exito">Anuncio eliminado correctamente.</p>
           <?php endif;?>
 
       <a href="propiedades/crear.php" class="boton boton-verde">Crear propidad</a>
@@ -36,7 +63,7 @@ incluirTemplate("header");
             <th>Titulo</th>
             <th>Imagen</th>
             <th>Precio</th>
-            <th>Acciones</th>
+            <th>Acciones</th
           </tr>
         </thead>
 
@@ -48,7 +75,11 @@ incluirTemplate("header");
             <td><img src="../imagen/<?php echo $propiedad['imagen'];?>" class="imagen-tabla" alt="Imagen del anuncio"> </td>
             <td><?php echo $propiedad['precio'];?></td>
             <td>
-              <a href="#" class="boton-rojo-block">Eliminar</a>
+              <form method="POST"  class="w-100">
+                <input type="hidden" name="id" value="<?php echo $propiedad['id'];?>">
+                <input type="submit" class="boton-rojo-block" value="Eliminar">
+              </form>
+              
               <a href="propiedades/actualizar.php?id=<?php echo $propiedad['id'];?>" class="boton-amarillo-block">Actualizar</a>
             </td>
            </tr>
