@@ -1,25 +1,46 @@
 <?php
+
+$id = $_GET['id'];
+$id = filter_var($id,FILTER_VALIDATE_INT);
+if(!$id){
+  header('location: index.php');
+}
+
+ //Importar la conexion
+require __DIR__ . '/includes/config/datebase.php';
+$db= conectarDB();
+
+//consultas
+$query = "SELECT * FROM propiedades WHERE id = $id";
+
+//obtener resultados
+$resultado = mysqli_query($db,$query);
+
+if(! $resultado->num_rows){
+  header('location: index.php');
+}
+
+$propiedad = mysqli_fetch_assoc($resultado); 
+
 require"includes/funciones.php";
 incluirTemplate("header");
 ?>
     <main class="contenedor seccion contenido-centrado">
-      <h1>Casa en venta frete al bosque</h1>
+      <h1><?php echo $propiedad['titulo'];?></h1>
 
-      <picture
-        ><source srcset="build/img/destacada.webp" type="image/webp" />
-        <source srcset="build/img/destacada.jpg" type="image/jpeg" />
+      
         <img
           loading="lazy"
-          src="build/img/destacada.jpg"
+          src="imagen/<?php echo $propiedad['imagen'];?>"
           alt="Entrada de la propiedad"
         />
-      </picture>
+      
       <div class="resumen-propiedad">
-        <p class="precio">3,000,000</p>
+        <p class="precio">$ <?php echo $propiedad['precio'];?></p>
         <ul class="iconos-caracterisrticas">
           <li>
             <img class="icono" loading="lazy" src="build/img/icono_wc.svg" alt="Icono wc" />
-            <p>3</p>
+            <p><?php echo $propiedad['wc'];?></p>
           </li>
           <li>
             <img class="icono"
@@ -27,7 +48,7 @@ incluirTemplate("header");
               src="build/img/icono_estacionamiento.svg"
               alt="Icono estacionamiento"
             />
-            <p>4</p>
+            <p><?php echo $propiedad['estacionamiento'];?></p>
           </li>
           <li>
             <img class="icono"
@@ -35,30 +56,17 @@ incluirTemplate("header");
               src="build/img/icono_dormitorio.svg"
               alt="Icono dormitorio"
             />
-            <p>4</p>
+            <p><?php echo $propiedad['habitaciones'];?></p>
           </li>
         </ul>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint officiis
-          alias repellat, facere quia harum nisi aliquam cupiditate aut. Odio a
-          cupiditate aliquam earum provident nam porro illo rerum in. Lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Ab praesentium est
-          ipsam sed accusantium velit, animi rem nemo perferendis et architecto
-          ex vitae, necessitatibus non quo odio eius, nam nobis. Lorem ipsum
-          dolor sit amet consectetur adipisicing elit. Tempora qui consequatur
-          sequi architecto nulla, neque soluta praesentium voluptatum
-          necessitatibus est in veritatis repudiandae voluptas eum, itaque
-          dolorum saepe possimus autem.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse suscipit
-          atque ducimus ab iusto dolorem omnis consectetur? Et modi doloribus,
-          sed reiciendis, tempore ab sunt amet eveniet rem, voluptates incidunt?
-        </p>
+      <?php echo $propiedad['descripcion'];?>   
+      </p>
       </div>
     </main>
 
     <?php
 
+    mysqli_close($db); 
    incluirTemplate("footer");
 ?>

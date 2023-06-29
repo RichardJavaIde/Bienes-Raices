@@ -58,7 +58,7 @@ incluirTemplate("header",$inicio);
       ?>
      
       <div class="ver-todas aliniar-derecha">
-        <a href="anuncios.html" class="boton-verde"> Ver todas</a>
+        <a href="anuncios.php" class="boton-verde"> Ver todas</a>
       </div>
     </section>
     <section class="imagen-contacto">
