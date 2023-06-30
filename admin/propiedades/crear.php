@@ -1,4 +1,11 @@
 <?php
+require"../../includes/funciones.php";
+$auth= estaAutenticado();
+if(!$auth){
+      header('location: /bienesraices_inicio/index.php');
+      
+  }
+
 require "../../includes/config/datebase.php"; 
 $db = conectarDB();
 //var_dump(conectarDB());
@@ -117,7 +124,6 @@ if($rtesultado){
 
 }
  
-require"../../includes/funciones.php";
 incluirTemplate("header");
 ?>
     <main class="contenedor seccion">
@@ -136,36 +142,36 @@ incluirTemplate("header");
       <fieldset>
         <legend>Informacion de la propiedad</legend>
         <label for="titulo">Titulo</label>
-        <input value="<?php echo $titulo;?>" name="titulo" type="text" id="titulo" placeholder="Titulo de la propiedad">
+        <input value="<?php echo $titulo;?>" name="titulo" type="text" id="titulo" placeholder="Titulo de la propiedad" required>
 
         <label for="precio">Precio</label>
-        <input value="<?php echo $precio; ?>" name="precio" min="1" type="number" id="precio" placeholder="Precio de la propiedad">
+        <input value="<?php echo $precio; ?>" name="precio" min="1" type="number" id="precio" placeholder="Precio de la propiedad" required>
          
         <label for="imagen">Imagen</label>
-        <input  type="file" id="imagen" accept="image/jpeg ,image/png ,image/jpg" name="imagen1">
+        <input required type="file" id="imagen" accept="image/jpeg ,image/png ,image/jpg" name="imagen1">
         
         <label for="descriocion">Descripcion</label>
-        <textarea  name="descriocion" id="descriocion" placeholder="Detalles"><?php echo $descriocion; ?></textarea>
+        <textarea  name="descriocion" id="descriocion" placeholder="Detalles" required><?php echo $descriocion; ?></textarea>
         
       </fieldset>
 
       <fieldset>
         <legend>Informacion de la propiedad</legend>
         <label for="habitaciones">Habitaciones</label>
-        <input  value="<?php echo $habitaciones; ?>" name="habitaciones" min="1" type="number" id="habitaciones" placeholder="EJ:1">
+        <input  value="<?php echo $habitaciones; ?>" name="habitaciones" min="1" type="number" id="habitaciones" placeholder="EJ:1" required>
         
         <label for="wc">Baños</label>
-        <input value="<?php echo $wc; ?>" name="wc" min="1" type="number" id="wc" placeholder="EJ:1">
+        <input value="<?php echo $wc; ?>" name="wc" min="1" type="number" id="wc" placeholder="EJ:1" required>
 
         <label for="estacionamiento">Estacionamiento</label>
-        <input value="<?php echo $estacionamiento; ?>" name="estacionamiento" min="1" type="number" id="estacionamiento" placeholder="EJ:1">
+        <input value="<?php echo $estacionamiento; ?>" name="estacionamiento" min="1" type="number" id="estacionamiento" placeholder="EJ:1" required>
 
         
       </fieldset>
 
       <fieldset>
         <legend>Vendedor</legend>
-        <select name="vendedor" >
+        <select required name="vendedor" >
           <option value="">-- Seleccionar --</option>
         <?php while($vendedor = mysqli_fetch_assoc($resultado)):?>
           

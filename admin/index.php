@@ -1,4 +1,11 @@
 <?php
+require"../includes/funciones.php";
+$auth= estaAutenticado();
+  if(!$auth){
+      header('location: /bienesraices_inicio/index.php');
+      
+  }
+
 //Improtar la coneccion a de la base de datos.
 require "../includes/config/datebase.php"; 
 $db = conectarDB();
@@ -40,7 +47,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
   }
 //Incluir template.
-require"../includes/funciones.php";
+
 incluirTemplate("header");
 ?>
     <main class="contenedor seccion">

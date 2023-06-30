@@ -1,5 +1,10 @@
 <?php
-
+require"../../includes/funciones.php";
+$auth= estaAutenticado();
+if(!$auth){
+      header('location: /bienesraices_inicio/index.php');
+      
+  }
 //Validar la URL por ID Valido.
 $id = $_GET['id'];
 $id = filter_var($id,FILTER_VALIDATE_INT);
@@ -146,7 +151,7 @@ if($rtesultado){
 
 }
  
-require"../../includes/funciones.php";
+
 incluirTemplate("header");
 ?>
     <main class="contenedor seccion">
